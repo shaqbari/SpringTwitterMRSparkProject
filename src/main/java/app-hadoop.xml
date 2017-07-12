@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hadoop="http://www.springframework.org/schema/hadoop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	
+	<hadoop:configuration id="hadoopConf">
+		fs.default.name=hdfs://NameNode:9000
+	</hadoop:configuration>
+	<hadoop:job id="twitterJob"
+		input-path="/twitter_input_ns1/"
+		output-path="/twitter_output_ns1/"
+		mapper="com.sist.mapred.TwitterMapper"
+		reducer="com.sist.mapred.TwitterReducer"
+		configuration-ref="hadoopConf"
+		scope="prototype"
+	/><!-- scope를 prototype으로 하지 않으면 새로운내용을 못받는다. -->
+	<hadoop:job-runner
+		job-ref="twitterJob"
+		run-at-startup="false"
+	/>
+	
+
+</beans>
