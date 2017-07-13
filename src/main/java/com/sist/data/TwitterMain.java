@@ -9,8 +9,8 @@ import twitter4j.TwitterStreamFactory;
 public class TwitterMain {
 	public static void main(String[] args) {
 		try {
-			//List<String> list=RankData.naverRank();
-			List<String> list=RankData.daumRank();
+			List<String> list=RankData.naverRank();
+			//List<String> list=RankData.daumRank();
 			//String[] data=(String[]) list.toArray();
 			String[] data=new String[list.size()];
 			list.toArray(data);

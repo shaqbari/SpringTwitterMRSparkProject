@@ -40,9 +40,10 @@ public class TwitterListener implements StatusListener{
 	public void onStatus(Status status) {
 		try{
 			String data=status.getText();
+			System.out.println(data);
 			try {
-				//FileWriter fw=new FileWriter("./input/naver.txt", true);//true주면 append모드 //input폴더를 만들어줘야 한다.
-				FileWriter fw=new FileWriter("./input/daum.txt", true);//true주면 append모드 //input폴더를 만들어줘야 한다.
+				FileWriter fw=new FileWriter("./input/naver.txt", true);//true주면 append모드 //input폴더를 만들어줘야 한다.
+				//FileWriter fw=new FileWriter("./input/daum.txt", true);//true주면 append모드 //input폴더를 만들어줘야 한다.
 				fw.write(data);
 				fw.close();
 				

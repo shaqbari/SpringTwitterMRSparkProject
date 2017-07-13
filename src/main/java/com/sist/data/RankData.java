@@ -23,9 +23,10 @@ public class RankData {
                   
                 int j=0;
                  for (int i = 0; i < 10; i++) {
-                     System.out.println("------------------------------------------");
-                     System.out.println("검색어 : " + elements.get(j).text());
-                     list.add(elements.get(i).text());
+                     //System.out.println("------------------------------------------");
+                     //System.out.println("검색어 : " + elements.get(j).text());
+                     //list.add(elements.get(i).text());i가 아니라 j다.
+                	 list.add(elements.get(j).text());
                      j+=2;
                  }
              }

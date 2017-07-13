@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//네이버랭크
 public class TwitterMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
 	private final static IntWritable one=new IntWritable(1);
 	private Text result=new Text();

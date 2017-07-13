@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//daum
+//daum랭크
 @Component
 @Scope("prototype")//실제프로그램은 여러명이 요청할수 있으므로 prototype으로 생성해야 한다. 싱글톤이면 다른사람끝날때까지 기다려야 한다.
 public class TwitterSpark implements Serializable{//Spring에서 실행하려면 Serializable을 상속받아야 한다.
@@ -32,7 +32,7 @@ public class TwitterSpark implements Serializable{//Spring에서 실행하려면
 		TwitterSpark ts=new TwitterSpark();
 		
 		try {
-			File dir=new File("./output_daum");
+			File dir=new File("./output_daum_ns1");
 			if (dir.exists()) {
 				File[] list=dir.listFiles();
 				//리눅스는 폴더 안의 내용을 모두 다 지우고 rm -rf
@@ -78,7 +78,7 @@ public class TwitterSpark implements Serializable{//Spring에서 실행하려면
 					m[a]=p[a].matcher(s);//s는 한줄
 					while (m[a].find()) {//한줄에 여러개일 경우를 위해서 while문을 돌린다.
 						wordList.add(m[a].group());
-						System.out.println("find : "+m[a].group());
+						System.out.println(" ; find : "+m[a].group());
 					}
 					
 				}
@@ -86,6 +86,8 @@ public class TwitterSpark implements Serializable{//Spring에서 실행하려면
 				return wordList;
 			}
 		});
+		
+		System.out.println("wordList크기는 : "+wordList.size());
 		
 		//자른거에 1씩 부여
 		JavaPairRDD<String, Integer> counts=words.mapToPair(new PairFunction<String, String, Integer>() {
@@ -109,7 +111,7 @@ public class TwitterSpark implements Serializable{//Spring에서 실행하려면
 		
 		//res.join(res);// selfjoin안된다. res대신 naver걸 join할 수 있다.
 		
-		res.saveAsTextFile("./output_daum/");
+		res.saveAsTextFile("./output_daum_ns1/");//하둡에 저장?
 		
 		
 		
@@ -120,7 +122,7 @@ public class TwitterSpark implements Serializable{//Spring에서 실행하려면
 			/*StringWriter s=new StringWriter();
 			CSVWriter cw=new CSVWriter(s);//까다로우니 나중에*/
 			String data="";
-			FileReader fr=new FileReader("./output_daum/part-00000");
+			FileReader fr=new FileReader("./output_daum_ns1/part-00000");
 			int i=0;
 			while ((i=fr.read())!=-1) {
 				data+=String.valueOf((char)i);//ascii -> char
